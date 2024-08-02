@@ -1,0 +1,15 @@
+{
+    "name": "aibek/mechta",
+    "autoload": {
+        "psr-4": {
+            "vBulletin\\Search\\": "src"
+        }
+    },
+    "authors": [
+        {
+            "name": "Aibek Anlamas",
+            "email": "aibek.anlamas@gmail.com"
+        }
+    ],
+    "require": {}
+}
