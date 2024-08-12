@@ -10,15 +10,15 @@ use vBulletin\Render;
 
 class SearchService
 {
-    private PDO $db;
     private Render $render;
     private Logger $logger;
+    private SearchRepository $repository;
 
-    public function __construct(PDO $db, Render $render, Logger $logger)
+    public function __construct(SearchRepository $repository, Render $render, Logger $logger)
     {
-        $this->db = $db;
         $this->render = $render;
         $this->logger = $logger;
+        $this->repository = $repository;
     }
 
     public function search(SearchRequest $request): void
@@ -34,17 +34,13 @@ class SearchService
 
     private function showResults(int $searchId): void
     {
-        $sth = $this->db->prepare('SELECT * FROM vb_search_results WHERE searchId = :searchId');
-        $sth->execute([':searchId' => $searchId]);
-        $results = $sth->fetchAll(PDO::FETCH_CLASS, SearchResult::class);
+        $results = $this->repository->getSearchResults($searchId);
         $this->renderSearchResults($results);
     }
 
     private function processSearch(string $query): void
     {
-        $sth = $this->db->prepare('SELECT * FROM vb_posts WHERE text LIKE :query');
-        $sth->execute([':query' => '%' . $query . '%']);
-        $results = $sth->fetchAll(PDO::FETCH_CLASS, SearchResult::class);
+        $results = $this->repository->getPosts($query);
         $this->renderSearchResults($results);
         $this->logger->log($query);
     }
