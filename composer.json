@@ -1,15 +1,18 @@
 {
-    "name": "aibek/mechta",
-    "autoload": {
-        "psr-4": {
-            "vBulletin\\Search\\": "src"
-        }
-    },
-    "authors": [
-        {
-            "name": "Aibek Anlamas",
-            "email": "aibek.anlamas@gmail.com"
-        }
-    ],
-    "require": {}
+  "name": "aibek/mechta",
+  "autoload": {
+    "psr-4": {
+      "vBulletin\\": "src"
+    }
+  },
+  "authors": [
+    {
+      "name": "Aibek Anlamas",
+      "email": "aibek.anlamas@gmail.com"
+    }
+  ],
+  "require": {
+    "ext-pdo": "*",
+    "vlucas/phpdotenv": "*"
+  }
 }
